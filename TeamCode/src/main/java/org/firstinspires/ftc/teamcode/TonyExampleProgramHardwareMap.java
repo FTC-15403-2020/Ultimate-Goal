@@ -30,26 +30,11 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * This is NOT an opmode.
- *
- * This class can be used to define all the specific hardware for a single robot.
- * In this case that robot is a Pushbot.
- * See PushbotTeleopTank_Iterative and others classes starting with "Pushbot" for usage examples.
- *
- * This hardware class assumes the following device names have been configured on the robot:
- * Note:  All names are lower case and some have single spaces between words.
- *
- * Motor channel:  Left  drive motor:        "left_drive"
- * Motor channel:  Right drive motor:        "right_drive"
- * Motor channel:  Manipulator drive motor:  "left_arm"
- * Servo channel:  Servo to open left claw:  "left_hand"
- * Servo channel:  Servo to open right claw: "right_hand"
- */
 public class TonyExampleProgramHardwareMap
 {
     /* Public OpMode members. */
@@ -76,31 +61,28 @@ public class TonyExampleProgramHardwareMap
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        leftfrontDrive  = hwMap.get(DcMotor.class, "launcherleft");
-        rightfrontDrive = hwMap.get(DcMotor.class, "launcherright");
-       // leftbackDrive  = hwMap.get(DcMotor.class, "left_drive");
-        //rightbackDrive = hwMap.get(DcMotor.class, "right_drive");
-        leftfrontDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        rightfrontDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        //leftbackDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        //rightbackDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-
-        // Set all motors to zero power
-        leftfrontDrive.setPower(0);
-        rightfrontDrive.setPower(0);
-       // leftbackDrive.setPower(0);
-        //rightbackDrive.setPower(0);
-
-        // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
-        leftfrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightfrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //leftbackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //rightbackDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftfrontDrive = HardwareInitMotor("Launcherleft", true);
 
         // Define and initialize ALL installed servos.
         //funnyServo  = hwMap.get(Servo.class, "funnyServo");
         //funnyServo.setPosition(0);
     }
+    public DcMotor HardwareInitMotor(String configname, boolean forward) {
+        DcMotor motor = null;
+        motor = hwMap.get(DcMotor.class, configname);
+        motor.setPower(0);
+        //If the motor is a wheel on the left of the robot OR another motor somewhere else use FORWARD!
+        if (forward) {
+            motor.setDirection(DcMotor.Direction.FORWARD);
+        }
+        //If the motor is a wheel on the right of the robot then use REVERSE!
+        else {
+            motor.setDirection(DcMotor.Direction.REVERSE);
+        }
+        motor.setPower(0);
+        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        return motor;
+    }
+
 }
 
