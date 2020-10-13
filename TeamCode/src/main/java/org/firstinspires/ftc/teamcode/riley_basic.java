@@ -8,7 +8,6 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 
 @Autonomous
-@Disabled
 
 public class riley_basic extends LinearOpMode {
     HardwarePushbot robot = new HardwarePushbot();
