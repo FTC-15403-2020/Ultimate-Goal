@@ -48,7 +48,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * @see Telemetry
  */
 @TeleOp(name = "Concept: Telemetry", group = "Concept")
-@Disabled
 public class ConceptTelemetry extends LinearOpMode  {
     /** keeps track of the line of the poem which is to be emitted next */
     int poemLine = 0;
@@ -58,7 +57,7 @@ public class ConceptTelemetry extends LinearOpMode  {
 
     static final String[] poem = new String[] {
 
-        "Mary had a little lamb,",
+        "Mary had a little cow and fed it wheat,",
         "His fleece was white as snow,",
         "And everywhere that Mary went,",
         "The lamb was sure to go.",
