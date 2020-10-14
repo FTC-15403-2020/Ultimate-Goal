@@ -8,28 +8,42 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Autonomous
 
     public class basic_2 extends LinearOpMode {
-        RileyHardwaremap robot = new RileyHardwaremap();
+        DriveBaseHardwareMap robot = new DriveBaseHardwareMap();
         private ElapsedTime runtime = new ElapsedTime();
 
         static final double FORWARD_SPEED = 0.6;
-        static final double FORWARD_SPEED_ALEX = 2.0;
+        static final double FORWARD_SPEED_ALEX = 1.0;
+        static double turnPower = 0.5;
+        static double strafePower = 0.5;
+        static double fwdBackPower = 0.5;
+        static double leftFrontPower;
+        static double leftBackPower;
+        static double rightFrontPower;
+        static double rightBackPower;
 
 
-        public void runOpMode() {
+
+    public void runOpMode() {
 
             robot.init(hardwareMap);
 
             waitForStart();
 
-            robot.Tony.setPower(FORWARD_SPEED);
-            runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 2.0))
 
-                robot.Alex.setPower(FORWARD_SPEED_ALEX);
-            runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 2.0)){
-            }
+        while (opModeIsActive()){
+            fwdBackPower = -gamepad1.left_stick_y;
+            strafePower = gamepad1.left_stick_x;
+            turnPower = gamepad1.right_stick_y;
+            leftFrontPower = fwdBackPower + turnPower + strafePower;
+            rightFrontPower = fwdBackPower - turnPower - strafePower;
+            leftBackPower = fwdBackPower + turnPower - strafePower;
+            rightBackPower = fwdBackPower - turnPower + strafePower;
+            robot.leftfrontDrive.setPower(-leftFrontPower);
+            robot.rightfrontDrive.setPower(rightFrontPower);
+            robot.leftbackDrive.setPower(-leftBackPower);
+            robot.rightbackDrive.setPower(rightBackPower);
         }
-    }
 
+    }
+}
 
