@@ -29,7 +29,6 @@
 
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -37,10 +36,10 @@ import com.qualcomm.robotcore.util.Range;
 
 @Autonomous(name="TonyExampleProgram", group="Pushbot")
 //@Disabled
-public class TonyExampleProgram extends LinearOpMode {
+public class DriveBaseTeleop extends LinearOpMode {
 
     /* Declare OpMode members. */
-    TonyExampleProgramHardwareMap        robot   = new TonyExampleProgramHardwareMap();   // Use a Pushbot's hardware
+    DriveBaseHardwareMap robot   = new DriveBaseHardwareMap();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
 
