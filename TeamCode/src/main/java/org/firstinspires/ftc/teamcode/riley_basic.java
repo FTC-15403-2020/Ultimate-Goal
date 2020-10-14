@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 @Autonomous
 
 public class riley_basic extends LinearOpMode {
-    HardwarePushbot robot = new HardwarePushbot();
+    RileyHardwaremap robot = new RileyHardwaremap();
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double FORWARD_SPEED = 0.6;
@@ -22,8 +22,7 @@ public class riley_basic extends LinearOpMode {
 
         waitForStart();
 
-        robot.leftDrive.setPower(FORWARD_SPEED);
-        robot.rightDrive.setPower(FORWARD_SPEED);
+        robot.Tony.setPower(FORWARD_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 2.0)) {
         }

@@ -11,7 +11,8 @@ public class RileyHardwaremap {
     /* Public OpMode members. */
 
 
-    public DcMotor Jasper      = null;
+    public DcMotor Tony      = null;
+    public DcMotor Alex = null;
 
 
 
@@ -31,15 +32,16 @@ public class RileyHardwaremap {
 
         // Define and Initialize Motors
 
-       Jasper  = hwMap.get(DcMotor.class, "tony");
+        Tony = hwMap.get(DcMotor.class, "tony");
+        Alex  = hwMap.get(DcMotor.class, "alex");
 
-
-        Jasper.setDirection(DcMotor.Direction.FORWARD);
+        Tony.setDirection(DcMotor.Direction.FORWARD);
+        Alex.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Set all motors to zero power
 
-     Jasper.setPower(0);
+     Tony.setPower(0);
 
         // Not running with encoders
 
