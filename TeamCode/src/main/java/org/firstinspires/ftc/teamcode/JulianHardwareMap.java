@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class JulianHardwareMap {
 
     public DcMotor Jasper      = null;
-
+    public DcMotor Alex   = null;
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
@@ -27,14 +27,18 @@ public class JulianHardwareMap {
 
         // Define and Initialize Motors
         Jasper  = hwMap.get(DcMotor.class, "tony");
+        Alex  = hwMap.get(DcMotor.class, "");
 
         Jasper.setDirection(DcMotor.Direction.FORWARD);
+        Alex.setDirection(DcMotor.Direction.REVERSE);
 
         // Set all motors to zero power
         Jasper.setPower(0);
+        Alex.setPower(0);
 
         // Not running with encoders
         Jasper.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Alex.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
     }
