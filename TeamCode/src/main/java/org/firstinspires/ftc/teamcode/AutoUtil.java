@@ -47,7 +47,7 @@ public class AutoUtil extends LinearOpMode {
     Servo leftServo;
     Servo rightServo;
     Servo stoneServo;
-    Servo grabberServo;
+    //Servo grabberServo;
 
 
     // The IMU sensor object
@@ -270,7 +270,7 @@ public class AutoUtil extends LinearOpMode {
         rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
-    public void initAuto(){
+   /* public void initAuto(){
         leftFrontMotor = hardwareMap.dcMotor.get("leftFrontDrive");
         rightFrontMotor = hardwareMap.dcMotor.get("rightFrontDrive");
         leftBackMotor = hardwareMap.dcMotor.get("leftBackDrive");
@@ -314,6 +314,7 @@ public class AutoUtil extends LinearOpMode {
         rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
+    */
     public double accelerate(DcMotor motor, double speed, double target){
         if(motor.getCurrentPosition()<(target/10)){
             return speed*1.30;
