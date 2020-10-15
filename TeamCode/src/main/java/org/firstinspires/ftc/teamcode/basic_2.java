@@ -2,10 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous
+@TeleOp
 
     public class basic_2 extends LinearOpMode {
         DriveBaseHardwareMap robot = new DriveBaseHardwareMap();
@@ -31,16 +32,16 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
         while (opModeIsActive()){
-            fwdBackPower = -gamepad1.left_stick_y;
+            fwdBackPower = gamepad1.left_stick_y;
             strafePower = gamepad1.left_stick_x;
             turnPower = gamepad1.right_stick_y;
-            leftFrontPower = fwdBackPower + turnPower + strafePower;
-            rightFrontPower = fwdBackPower - turnPower - strafePower;
-            leftBackPower = fwdBackPower + turnPower - strafePower;
-            rightBackPower = fwdBackPower - turnPower + strafePower;
-            robot.leftfrontDrive.setPower(-leftFrontPower);
+            leftFrontPower = fwdBackPower - turnPower - strafePower;
+            rightFrontPower = fwdBackPower + turnPower + strafePower;
+            leftBackPower = fwdBackPower - turnPower + strafePower;
+            rightBackPower = fwdBackPower + turnPower - strafePower;
+            robot.leftfrontDrive.setPower(leftFrontPower);
             robot.rightfrontDrive.setPower(rightFrontPower);
-            robot.leftbackDrive.setPower(-leftBackPower);
+            robot.leftbackDrive.setPower(leftBackPower);
             robot.rightbackDrive.setPower(rightBackPower);
         }
 
