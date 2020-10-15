@@ -23,7 +23,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
 import java.util.Locale;
 
-@TeleOp(name="IMU_Test", group="Mecanum_Drive")
+@TeleOp(name="shut up", group="Mecanum_Drive")
 @Disabled
 public class OdometryUtil extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
