@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -9,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @TeleOp
 
     public class basic_2 extends LinearOpMode {
-        DriveBaseHardwareMap robot = new DriveBaseHardwareMap();
+        ShooterHardwareMap robot = new ShooterHardwareMap();
         private ElapsedTime runtime = new ElapsedTime();
 
         static final double FORWARD_SPEED = 0.6;
