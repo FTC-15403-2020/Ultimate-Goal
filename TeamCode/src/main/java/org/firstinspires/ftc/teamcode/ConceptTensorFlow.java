@@ -22,7 +22,7 @@ import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.Parameters.CameraMonitorFeedback.AXES;
 
-@TeleOp(name = "ConceptTensorFlowVV", group = "TensorConcept")
+@TeleOp(name = "TensorCamera", group = "TensorConcept")
 public class ConceptTensorFlow extends LinearOpMode {
     //Variables for Camera
     private static final String TAG = "Webcam Sample";
