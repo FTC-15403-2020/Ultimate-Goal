@@ -27,6 +27,7 @@ public abstract class HardwareMapUtil {
         motor.setPower(0);
         motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         return motor;
+
     }
     public Servo HardwareInitServo(String configname, double position){
         Servo servo = null;
