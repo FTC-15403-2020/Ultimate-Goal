@@ -1,25 +1,27 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class MecanumTeleopHardwareMap extends HardwareMapUtil{
-    HardwareMap hwMap =null;
-    public DcMotor leftfrontDrive = null;
-    public DcMotor leftbackDrive = null;
-    public DcMotor rightfrontDrive = null;
-    public DcMotor rightbackDrive = null;
-    public void init(HardwareMap ahwMap){
-        leftfrontDrive = HardwareInitMotor ("LF", true);
-        leftbackDrive = HardwareInitMotor ("LB" , true);
-        rightfrontDrive = HardwareInitMotor ("RF" , true);
-        rightbackDrive = HardwareInitMotor ("RB" , true);
+public class MecanumTeleopHardwareMap extends  HardwareMapUtil
+{
+    /* Public OpMode members. */
+    public DcMotor  leftfrontDrive   = null;
+    public DcMotor  rightfrontDrive  = null;
+    public DcMotor  leftbackDrive   = null;
+    public DcMotor  rightbackDrive  = null;
+
+    public void init(HardwareMap ahwMap) {
+        hwMap = ahwMap;
+
+        // Define and Initialize Motors
+        leftfrontDrive = HardwareInitMotor("lfD", true);
+        rightbackDrive = HardwareInitMotor("rbD", false);
+        leftbackDrive = HardwareInitMotor("lbD", true);
+        rightfrontDrive = HardwareInitMotor("rfD", false);
     }
-
-
-    //leftfrontDrive = hwMap.get(DcMotor.class, "LF")
-    //leftbackDrive = hwMap.get(DcMotor.class, "LB")
-    //rightfrontDrive = hwMap.get(DcMotor.class, "RF")
-    //rightbackDrive = hwMap.get(DcMotor.class, "RB")
 }
+

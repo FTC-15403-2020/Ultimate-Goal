@@ -35,9 +35,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 
-@TeleOp (name="MecanumFix", group="hello")
+@TeleOp (name="MecanumDrive", group="hello")
 //@Disabled
-public class MecanumFix extends LinearOpMode {
+public class MecanumDrive extends LinearOpMode {
 
     /* Declare OpMode members. */
     MecanumTeleopHardwareMap robot = new MecanumTeleopHardwareMap() ;
@@ -71,15 +71,17 @@ public class MecanumFix extends LinearOpMode {
 
             fwdBackPower = gamepad1.left_stick_y;
             strafePower = gamepad1.left_stick_x;
-            turnPower = gamepad1.right_stick_y;
+            turnPower = -gamepad1.right_stick_x;
             leftFrontPower = fwdBackPower - turnPower - strafePower;
             rightFrontPower = fwdBackPower + turnPower + strafePower;
             leftBackPower = fwdBackPower - turnPower + strafePower;
             rightBackPower = fwdBackPower + turnPower - strafePower;
-            robot.leftfrontDrive.setPower(leftFrontPower);
-            robot.rightfrontDrive.setPower(rightFrontPower);
-            robot.leftbackDrive.setPower(leftBackPower);
-            robot.rightbackDrive.setPower(rightBackPower);
+            robot.leftfrontDrive.setPower(-leftFrontPower);
+            robot.rightfrontDrive.setPower(-rightFrontPower);
+            robot.leftbackDrive.setPower(-leftBackPower);
+            robot.rightbackDrive.setPower(-rightBackPower);
+            telemetry.addData("Speed", robot.rightbackDrive.getPower());
+            telemetry.update();
         }
 
     }
