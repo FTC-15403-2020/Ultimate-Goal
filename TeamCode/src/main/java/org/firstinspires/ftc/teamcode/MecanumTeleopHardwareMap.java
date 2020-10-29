@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class DriveBaseHardwareMap extends  HardwareMapUtil
+public class MecanumTeleopHardwareMap extends  HardwareMapUtil
 {
     /* Public OpMode members. */
     public DcMotor  leftfrontDrive   = null;
