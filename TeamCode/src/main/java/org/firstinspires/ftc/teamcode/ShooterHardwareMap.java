@@ -13,6 +13,7 @@ public class ShooterHardwareMap extends  HardwareMapUtil
     public DcMotor  rightfrontDrive  = null;
     public DcMotor  leftbackDrive   = null;
     public DcMotor  rightbackDrive  = null;
+    public DcMotor linearActuator = null;
 
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
