@@ -61,8 +61,8 @@ public class ConceptTensorFlow extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        cameraManager = ClassFactory.getInstance().getCameraManager();
-        cameraName = hardwareMap.get(WebcamName.class, "webcam");
+        //cameraManager = ClassFactory.getInstance().getCameraManager();
+        //cameraName = hardwareMap.get(WebcamName.class, "webcam");
 
 
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
@@ -129,8 +129,8 @@ public class ConceptTensorFlow extends LinearOpMode {
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraName = hardwareMap.get(WebcamName.class, "webcam");
-        parameters.addWebcamCalibrationFile("teamwebcamcalibrations.xml");
+        //parameters.cameraName = hardwareMap.get(WebcamName.class, "webcam");
+        //parameters.addWebcamCalibrationFile("teamwebcamcalibrations.xml");
         /*parameters.useExtendedTracking = true;
         parameters.cameraMonitorFeedback = AXES;*/
 

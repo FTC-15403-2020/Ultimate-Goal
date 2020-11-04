@@ -22,6 +22,8 @@ public class ShooterHardwareMap extends  HardwareMapUtil
         //rightbackDrive = HardwareInitMotor("rbD", false);
         //leftbackDrive = HardwareInitMotor("lbD", true);
         rightfrontDrive = HardwareInitMotor("rfD", false);
+
+        leftbackDrive = HardwareInitMotor("wgG", true);
     }
 }
 
