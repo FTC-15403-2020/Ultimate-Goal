@@ -82,6 +82,8 @@ public class ColorProximitySensor extends LinearOpMode {
             robot.rightbackDrive.setPower(-rightBackPower);
             telemetry.addData("Speed", robot.rightbackDrive.getPower());
             telemetry.update();
+
+            telemetry.addData("Color", );
         }
 
     }

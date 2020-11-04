@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -13,6 +15,7 @@ public class ColorSensorHardwareMap extends  HardwareMapUtil
     public DcMotor  rightfrontDrive  = null;
     public DcMotor  leftbackDrive   = null;
     public DcMotor  rightbackDrive  = null;
+    public ColorSensor ColorSensor = null;
 
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
@@ -24,6 +27,7 @@ public class ColorSensorHardwareMap extends  HardwareMapUtil
         rightfrontDrive = HardwareInitMotor("rfD", false);
 
         // Sensors
+        NormalizedColorSensor colorSensor;
     }
 }
 
