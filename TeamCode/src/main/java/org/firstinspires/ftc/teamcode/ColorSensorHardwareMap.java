@@ -15,7 +15,7 @@ public class ColorSensorHardwareMap extends  HardwareMapUtil
     public DcMotor  rightfrontDrive  = null;
     public DcMotor  leftbackDrive   = null;
     public DcMotor  rightbackDrive  = null;
-    public ColorSensor ColorSensor = null;
+    public ColorSensor color_sensor = null;
 
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
@@ -28,6 +28,7 @@ public class ColorSensorHardwareMap extends  HardwareMapUtil
 
         // Sensors
         NormalizedColorSensor colorSensor;
+        color_sensor = hwMap.get(ColorSensor.class, "sensor_color");
     }
 }
 

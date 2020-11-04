@@ -31,8 +31,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
+import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 
 
 @TeleOp (name="ColorProximitySensor", group="hello")
@@ -40,7 +43,7 @@ import com.qualcomm.robotcore.util.Range;
 public class ColorProximitySensor extends LinearOpMode {
 
     /* Declare OpMode members. */
-    MecanumTeleopHardwareMap robot = new MecanumTeleopHardwareMap() ;
+    ColorSensorHardwareMap robot = new ColorSensorHardwareMap() ;
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double FORWARD_SPEED = 0.6;
@@ -52,13 +55,13 @@ public class ColorProximitySensor extends LinearOpMode {
     static double rightFrontPower;
     static double rightBackPower;
 
+    ColorSensor color_sensor;
 
     @Override
     public void runOpMode() {
 
 
         robot.init(hardwareMap);
-
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -83,7 +86,15 @@ public class ColorProximitySensor extends LinearOpMode {
             telemetry.addData("Speed", robot.rightbackDrive.getPower());
             telemetry.update();
 
-            telemetry.addData("Color", );
+            robot.color_sensor.red();
+            robot.color_sensor.green();
+            robot.color_sensor.blue();
+
+            robot.color_sensor.alpha();
+            robot.color_sensor.argb();
+
+
+            telemetry.addData("Color", robot.color_sensor.red(), robot.color_sensor.green(), robot.color_sensor.blue());
         }
 
     }
