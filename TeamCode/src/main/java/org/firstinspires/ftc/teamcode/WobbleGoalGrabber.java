@@ -16,7 +16,7 @@ public class WobbleGoalGrabber extends LinearOpMode {
         waitForStart();
         while(opModeIsActive()) {
             double powa = gamepad1.left_trigger - gamepad1.right_trigger;
-            robot.leftbackDrive.setPower(powa);
+            robot.wobbleGrabMotor.setPower(powa);
         }
     }
 }
