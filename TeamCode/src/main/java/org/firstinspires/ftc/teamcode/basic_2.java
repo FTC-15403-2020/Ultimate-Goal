@@ -38,10 +38,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
             rightFrontPower = fwdBackPower + turnPower + strafePower;
             leftBackPower = fwdBackPower - turnPower + strafePower;
             rightBackPower = fwdBackPower + turnPower - strafePower;
-            robot.leftfrontDrive.setPower(leftFrontPower);
+            /*robot.leftfrontDrive.setPower(leftFrontPower);
             robot.rightfrontDrive.setPower(rightFrontPower);
             robot.leftbackDrive.setPower(leftBackPower);
-            robot.rightbackDrive.setPower(rightBackPower);
+            robot.rightbackDrive.setPower(rightBackPower);*/
         }
 
     }

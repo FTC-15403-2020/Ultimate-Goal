@@ -7,16 +7,31 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @TeleOp(name = "Wobble Grabber", group = "wobble")
 public class WobbleGoalGrabber extends LinearOpMode {
-    HardwareMap hwmap = null;
+    ShooterHardwareMap robot = new ShooterHardwareMap();
     @Override
     public void runOpMode() throws InterruptedException {
-        ShooterHardwareMap robot = new ShooterHardwareMap();
+        //ShooterHardwareMap robot = new ShooterHardwareMap();
         robot.init(hardwareMap);
+
+        final int SERVO_CLOSED  = 0;
+        final int SERVO_OPEN    = 60;
+        int servoTargetPos = SERVO_CLOSED;
+        double mPow = 0;
 
         waitForStart();
         while(opModeIsActive()) {
-            double powa = gamepad1.left_trigger - gamepad1.right_trigger;
-            robot.wobbleGrabMotor.setPower(powa);
+            int servoPos = (int) robot.wobbleGrabServo.getPosition();
+            mPow = gamepad1.left_trigger - gamepad1.right_trigger;
+            robot.wobbleGrabMotor.setPower(mPow);
+
+            /*if(gamepad1.left_bumper) {
+                if(servoPos > SERVO_OPEN / 2) {
+                    hwmap.wobbleGrabServo.setPosition(SERVO_CLOSED); }
+                else {hwmap.wobbleGrabServo.setPosition(SERVO_CLOSED); }*/
+            if(gamepad1.a) {
+                robot.wobbleGrabServo.setPosition(SERVO_CLOSED); }
+            if(gamepad1.b) {
+                robot.wobbleGrabServo.setPosition(SERVO_OPEN); }
         }
     }
 }

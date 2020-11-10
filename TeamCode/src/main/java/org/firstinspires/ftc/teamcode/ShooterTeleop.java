@@ -88,19 +88,24 @@ public class ShooterTeleop extends LinearOpMode {
 
         while (opModeIsActive()) {
             if(gamepad1.right_bumper==true) {
+                double period = 5000;
+                double quadScale = 0.1;
                 CurTime = elapTime;
                 timeShooting = timeShooting + (LastTime-CurTime);
                 LastTime = CurTime;
 
-                if(timeShooting > 500) {
-                    power = 1 * (timeShooting / 500);
+                if(timeShooting > period) {
+                    //power = -1 * (timeShooting / period);
+                    //power = -quadScale * ((timeShooting/period) * (timeShooting/period));
+                    power = Math.pow((timeShooting/period), 3);
                 }
                 else {
-                    power = 1;
+                    power = -1;
                 }
             }
             else {
                 timeShooting = 0;
+                power = 0;
             }
 
             // Send calculated power to wheels
