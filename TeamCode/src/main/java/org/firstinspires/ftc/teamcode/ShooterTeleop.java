@@ -44,8 +44,7 @@ public class ShooterTeleop extends LinearOpMode {
     private ElapsedTime     runtime = new ElapsedTime();
 
 
-    static final double     FORWARD_SPEED = 0.6;
-    static final double     TURN_SPEED    = 0.5;
+    static final double     MAX_SPEED = 1;
 
     @Override
     public void runOpMode() {
@@ -54,7 +53,12 @@ public class ShooterTeleop extends LinearOpMode {
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
          */
+        double elapTime = System.currentTimeMillis();
         robot.init(hardwareMap);
+        double power = 0;
+        double timeShooting = 0;
+        double CurTime = elapTime;
+        double LastTime = elapTime;
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
@@ -83,29 +87,29 @@ public class ShooterTeleop extends LinearOpMode {
             */
 
         while (opModeIsActive()) {
+            if(gamepad1.right_bumper==true) {
+                double period = 5000;
+                double quadScale = 0.1;
+                CurTime = elapTime;
+                timeShooting = timeShooting + (LastTime-CurTime);
+                LastTime = CurTime;
 
-            // Setup a variable for each drive wheel to save power level for telemetry
-            double leftPower;
-            double rightPower;
-
-            // Choose to drive using either Tank Mode, or POV Mode
-            // Comment out the method that's not used.  The default below is POV.
-
-            // POV Mode uses left stick to go forward, and right stick to turn.
-            // - This uses basic math to combine motions and is easier to drive straight.
-            double drive = gamepad1.left_stick_y;
-            double turn  =  gamepad1.right_stick_y;
-            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-            rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
-
-            // Tank Mode uses one stick to control each wheel.
-            // - This requires no math, but it is hard to drive forward slowly and keep straight.
-            // leftPower  = -gamepad1.left_stick_y ;
-            // rightPower = -gamepad1.right_stick_y ;
+                if(timeShooting > period) {
+                    //power = -1 * (timeShooting / period);
+                    //power = -quadScale * ((timeShooting/period) * (timeShooting/period));
+                    power = Math.pow((timeShooting/period), 3);
+                }
+                else {
+                    power = -1;
+                }
+            }
+            else {
+                timeShooting = 0;
+                power = 0;
+            }
 
             // Send calculated power to wheels
-            robot.leftfrontDrive.setPower(drive);
-            robot.rightfrontDrive.setPower(turn);
+            robot.shooterMotor.setPower(power);
 
             // Show the elapsed game time and wheel power.
         }
