@@ -87,7 +87,7 @@ public class ColorProximitySensor extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-
+            /**
             fwdBackPower = gamepad1.left_stick_y;
             strafePower = gamepad1.left_stick_x;
             turnPower = -gamepad1.right_stick_x;
@@ -101,6 +101,7 @@ public class ColorProximitySensor extends LinearOpMode {
             robot.rightbackDrive.setPower(-rightBackPower);
             telemetry.addData("Speed", robot.rightbackDrive.getPower());
             telemetry.update();
+             */
 
             //robot.color_sensor.red();
             //robot.color_sensor.green();
