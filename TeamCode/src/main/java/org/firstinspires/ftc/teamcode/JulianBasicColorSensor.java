@@ -14,4 +14,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 @Disabled
 public class JulianBasicColorSensor extends LinearOpMode {
 
+    @Override
+    public void runOpMode() throws InterruptedException {
+
+    }
 }
