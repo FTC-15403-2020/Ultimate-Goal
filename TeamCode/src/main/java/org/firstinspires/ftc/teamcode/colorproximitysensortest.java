@@ -26,7 +26,7 @@ public class colorproximitysensortest extends LinearOpMode {
     ColorSensorHardwareMap robot = new ColorSensorHardwareMap() ;
     private ElapsedTime runtime = new ElapsedTime();
 
-    /**
+    /*
     static final double FORWARD_SPEED = 0.6;
     static double turnPower = 0.5;
     static double strafePower = 0.5;
@@ -61,7 +61,7 @@ public class colorproximitysensortest extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-            /**
+            /*
             fwdBackPower = gamepad1.left_stick_y;
             strafePower = gamepad1.left_stick_x;
             turnPower = -gamepad1.right_stick_x;

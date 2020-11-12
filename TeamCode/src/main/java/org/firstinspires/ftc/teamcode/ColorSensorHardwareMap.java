@@ -8,10 +8,10 @@ import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class ColorSensorHardwareMap extends  HardwareMapUtil
+public class ColorSensorHardwareMap extends HardwareMapUtil
 {
     /* Public OpMode members. */
-    /**
+    /*
     public DcMotor  leftfrontDrive   = null;
     public DcMotor  rightfrontDrive  = null;
     public DcMotor  leftbackDrive   = null;
@@ -23,7 +23,7 @@ public class ColorSensorHardwareMap extends  HardwareMapUtil
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        /**
+        /*
         leftfrontDrive = HardwareInitMotor("lfD", true);
         rightbackDrive = HardwareInitMotor("rbD", false);
         leftbackDrive = HardwareInitMotor("lbD", true);
