@@ -4,14 +4,17 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "Wobble Grabber", group = "wobble")
 public class WobbleGoalGrabber extends LinearOpMode {
-    ShooterHardwareMap robot = new ShooterHardwareMap();
-    @Override
+    DcMotor rotationMotor;
+    Servo grabberServo;
+
+
     public void runOpMode() throws InterruptedException {
-        //ShooterHardwareMap robot = new ShooterHardwareMap();
-        robot.init(hardwareMap);
+        rotationMotor = hardwareMap.dcMotor.get("wobbleG");
+        grabberServo = hardwareMap.servo.get("wobbleS");
 
         final int SERVO_CLOSED  = 0;
         final int SERVO_OPEN    = 60;
@@ -20,18 +23,19 @@ public class WobbleGoalGrabber extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()) {
-            int servoPos = (int) robot.wobbleGrabServo.getPosition();
-            mPow = gamepad1.left_trigger - gamepad1.right_trigger;
-            robot.wobbleGrabMotor.setPower(mPow);
+            int servoPos = (int) grabberServo.getPosition();
+            //mPow = gamepad1.left_trigger - gamepad1.right_trigger;
+            mPow = gamepad1.left_stick_y;
+            rotationMotor.setPower(mPow);
 
             /*if(gamepad1.left_bumper) {
                 if(servoPos > SERVO_OPEN / 2) {
                     hwmap.wobbleGrabServo.setPosition(SERVO_CLOSED); }
                 else {hwmap.wobbleGrabServo.setPosition(SERVO_CLOSED); }*/
             if(gamepad1.a) {
-                robot.wobbleGrabServo.setPosition(SERVO_CLOSED); }
+                grabberServo.setPosition(SERVO_CLOSED); }
             if(gamepad1.b) {
-                robot.wobbleGrabServo.setPosition(SERVO_OPEN); }
+                grabberServo.setPosition(SERVO_OPEN); }
         }
     }
 }
