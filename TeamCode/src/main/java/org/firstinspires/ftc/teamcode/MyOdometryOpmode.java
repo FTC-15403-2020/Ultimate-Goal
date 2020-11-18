@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.OdometryGlobalCoordinatePosition;
 /**
  * Created by Sarthak on 10/4/2019.
  */
-@TeleOp(name = "My Odometry OpMode")
+@TeleOp(name = "Testing Odometry wheels")
 public class MyOdometryOpmode extends LinearOpMode {
     //Drive motors
     DcMotor right_front, right_back, left_front, left_back;
@@ -70,9 +70,9 @@ public class MyOdometryOpmode extends LinearOpMode {
             leftBackPower = fwdBackPower - turnPower + strafePower;
             rightBackPower = fwdBackPower + turnPower - strafePower;
             left_front.setPower(-leftFrontPower);
-            right_front.setPower(-rightFrontPower);
-            left_back.setPower(-leftBackPower);
-            right_back.setPower(-rightBackPower);
+            right_front.setPower(rightFrontPower);
+            left_back.setPower(leftBackPower);
+            right_back.setPower(rightBackPower);
         }
 
         //Stop the thread
