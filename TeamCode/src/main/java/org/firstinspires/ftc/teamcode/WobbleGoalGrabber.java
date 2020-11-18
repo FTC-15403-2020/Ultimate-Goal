@@ -23,6 +23,8 @@ public class WobbleGoalGrabber extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()) {
+            telemetry.addData("joystick", gamepad1.left_stick_y);
+            telemetry.update();
             int servoPos = (int) grabberServo.getPosition();
             //mPow = gamepad1.left_trigger - gamepad1.right_trigger;
             mPow = gamepad1.left_stick_y;
