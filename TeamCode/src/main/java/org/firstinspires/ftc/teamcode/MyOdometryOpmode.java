@@ -6,10 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.OdometryGlobalCoordinatePosition;
-
-/**
- * Created by Sarthak on 10/4/2019.
- */
 @TeleOp(name = "Testing Odometry wheels")
 public class MyOdometryOpmode extends LinearOpMode {
     //Drive motors
@@ -49,6 +45,7 @@ public class MyOdometryOpmode extends LinearOpMode {
 
         globalPositionUpdate.reverseRightEncoder();
         globalPositionUpdate.reverseNormalEncoder();
+        globalPositionUpdate.reverseLeftEncoder();
 
         while(opModeIsActive()){
             //Display Global (x, y, theta) coordinates
@@ -72,7 +69,14 @@ public class MyOdometryOpmode extends LinearOpMode {
             left_front.setPower(-leftFrontPower);
             right_front.setPower(rightFrontPower);
             left_back.setPower(leftBackPower);
-            right_back.setPower(rightBackPower);
+            right_back.setPower(-rightBackPower);
+            if(gamepad1.a){
+                left_back.setPower(-1);
+                right_back.setPower(1);
+                left_front.setPower(1);
+                right_front.setPower(-1);
+
+            }
         }
 
         //Stop the thread

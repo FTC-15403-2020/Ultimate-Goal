@@ -43,7 +43,7 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
         horizontal encoder travels to the right, it returns positive value
         */
         verticalLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        verticalRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        verticalRight.setDirection(DcMotorSimple.Direction.REVERSE);
         horizontal.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Set the mode of the odometry encoders to RUN_WITHOUT_ENCODER
