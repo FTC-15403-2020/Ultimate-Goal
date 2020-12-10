@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.io.File;
 import java.util.List;
@@ -23,7 +24,8 @@ import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.Parameters.CameraMonitorFeedback.AXES;
 
 @TeleOp(name = "TensorCamera", group = "TensorConcept")
-public class ConceptTensorFlow extends LinearOpMode {
+public class ConceptTensorFlow extends RandomElementDetector {
+    private ElapsedTime runtime = new ElapsedTime();
     //Variables for Camera
     private static final String TAG = "Webcam Sample";
     private static final int secondsPermissionTimeout = Integer.MAX_VALUE;
@@ -61,9 +63,9 @@ public class ConceptTensorFlow extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        cameraManager = ClassFactory.getInstance().getCameraManager();
-        cameraName = hardwareMap.get(WebcamName.class, "webcam");
-
+        //cameraManager = ClassFactory.getInstance().getCameraManager();
+        //cameraName = hardwareMap.get(WebcamName.class, "webcam");
+        telemetry.addData("how many rings: ", RandomElementNumber());
 
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
@@ -92,8 +94,10 @@ public class ConceptTensorFlow extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+
+
             //---------------------------
-            if (tfod != null) {
+            /*if (tfod != null) {
                 // getUpdatedRecognitions() will return null if no new information is available since
                 // the last time that call was made.
                 List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
@@ -109,7 +113,7 @@ public class ConceptTensorFlow extends LinearOpMode {
                                 recognition.getRight(), recognition.getBottom());
                     }
                 }
-            }
+            }*/
             telemetry.update();
 
             if (tfod != null) {
@@ -129,8 +133,8 @@ public class ConceptTensorFlow extends LinearOpMode {
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraName = hardwareMap.get(WebcamName.class, "webcam");
-        parameters.addWebcamCalibrationFile("teamwebcamcalibrations.xml");
+        //parameters.cameraName = hardwareMap.get(WebcamName.class, "webcam");
+        //parameters.addWebcamCalibrationFile("teamwebcamcalibrations.xml");
         /*parameters.useExtendedTracking = true;
         parameters.cameraMonitorFeedback = AXES;*/
 

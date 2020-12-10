@@ -8,21 +8,32 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class ShooterHardwareMap extends  HardwareMapUtil
 {
+    HardwareMap hwmap       = null;
+
     /* Public OpMode members. */
-    public DcMotor  leftfrontDrive   = null;
-    public DcMotor  rightfrontDrive  = null;
-    public DcMotor  leftbackDrive   = null;
-    public DcMotor  rightbackDrive  = null;
+    public DcMotor  shooterMotor        = null;
+    public DcMotor  wobbleGrabMotor     = null;
+    public Servo    wobbleGrabServo     = null;
     public DcMotor linearActuator = null;
 
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        leftfrontDrive = HardwareInitMotor("lfD", true);
-        //rightbackDrive = HardwareInitMotor("rbD", false);
-        //leftbackDrive = HardwareInitMotor("lbD", true);
-        rightfrontDrive = HardwareInitMotor("rfD", false);
+        /*shooterMotor = HardwareInitMotor("shootM", true);
+        wobbleGrabMotor = HardwareInitMotor("wobbleM", false);
+        wobbleGrabServo = HardwareInitServo("wobbleS", 0);*/
+
+        shooterMotor    = hwmap.get(DcMotor.class, "shootM");
+        shooterMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        shooterMotor.setPower(0);
+
+        wobbleGrabMotor = hwmap.get(DcMotor.class, "wobbleG");
+        wobbleGrabServo = hwmap.get(Servo.class, "wobbleS");
+        wobbleGrabServo.setPosition(0);
+        linearActuator = HardwareInitMotor ("lfD", true);
+
+        //shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 }
 

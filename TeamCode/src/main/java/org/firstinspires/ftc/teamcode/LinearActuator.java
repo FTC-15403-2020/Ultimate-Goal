@@ -21,7 +21,7 @@ public class LinearActuator extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            actuator_power=gamepad1.left_stick_y;
+            actuator_power=-gamepad1.left_stick_y;
            robot.linearActuator.setPower(actuator_power);
             }
 
