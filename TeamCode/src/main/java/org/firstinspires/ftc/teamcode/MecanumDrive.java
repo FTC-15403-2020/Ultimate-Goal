@@ -41,7 +41,7 @@ public class MecanumDrive extends LinearOpMode {
 
     /* Declare OpMode members. */
     MecanumTeleopHardwareMap robot = new MecanumTeleopHardwareMap() ;
-    private ElapsedTime runtime = new ElapsedTime();
+
 
     static final double FORWARD_SPEED = 0.6;
     static double turnPower = 0.5;

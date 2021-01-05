@@ -24,6 +24,12 @@ public class ShooterMechanism extends LinearOpMode {
         double CurTime = elapTime;
         double LastTime = elapTime;
         double poweraiming = 0;
+        double aimTime = 0;
+
+        telemetry.addData("Status", "Ready to run");    //
+        telemetry.update();
+
+        waitForStart();
 
         while (opModeIsActive()) {
 
@@ -53,10 +59,11 @@ public class ShooterMechanism extends LinearOpMode {
 
             if (gamepad1.a == true) {
                 poweraiming = 0.5;
-                while (gamepad1.a == true) {
-                    elapTime += 1;
-                }
-                if (elapTime == 5) {
+            }
+            while (gamepad1.a == true) {
+                aimTime += 1;
+
+                if (aimTime == 10) {
                     poweraiming = 0;
                     break;
                 }
