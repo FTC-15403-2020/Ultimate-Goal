@@ -64,7 +64,7 @@ public class IntakeMechanism extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            IntakeSpeed=gamepad1.right_stick_y;
+            IntakeSpeed=-gamepad1.right_stick_y;
             robot.intakeMotor.setPower(IntakeSpeed);
 
 

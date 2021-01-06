@@ -51,6 +51,7 @@ public class FirstSemesterTeleop extends LinearOpMode {
     static double rightFrontPower;
     static double rightBackPower;
     static final double     MAX_SPEED = 1;
+    static double IntakeSpeed;
 
     @Override
     public void runOpMode() {
@@ -77,6 +78,7 @@ public class FirstSemesterTeleop extends LinearOpMode {
             fwdBackPower = gamepad1.left_stick_y;
             strafePower = gamepad1.left_stick_x;
             turnPower = -gamepad1.right_stick_x;
+
             leftFrontPower = fwdBackPower - turnPower - strafePower;
             rightFrontPower = fwdBackPower + turnPower + strafePower;
             leftBackPower = fwdBackPower - turnPower + strafePower;
@@ -87,7 +89,7 @@ public class FirstSemesterTeleop extends LinearOpMode {
             robot.rightbackDrive.setPower(-rightBackPower);
             telemetry.addData("Speed", robot.rightbackDrive.getPower());
             telemetry.update();
-            if(gamepad1.right_bumper==true) {
+            if(gamepad2.right_bumper==true) {
                 double period = 5000;
                 double quadScale = 0.1;
                 CurTime = elapTime;
@@ -107,12 +109,14 @@ public class FirstSemesterTeleop extends LinearOpMode {
             }
 
             robot.shooterMotor.setPower(power);
-            mPow = gamepad1.left_stick_y/2;
+            mPow = gamepad2.left_stick_y/2;
             robot.wobbleGrabMotor.setPower(mPow);
-            if(gamepad1.a) {
+            if(gamepad2.a) {
                 robot.wobbleGrabServo.setPosition(SERVO_CLOSED); }
-            if(gamepad1.b) {
+            if(gamepad2.b) {
                 robot.wobbleGrabServo.setPosition(SERVO_OPEN); }
+            IntakeSpeed=-gamepad2.right_stick_y;
+            robot.intakeMotor.setPower(IntakeSpeed);
         }
 
     }

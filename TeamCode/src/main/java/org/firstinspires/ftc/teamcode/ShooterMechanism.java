@@ -67,7 +67,7 @@ public class ShooterMechanism extends LinearOpMode {
                     poweraiming = 0;
                     break;
                 }
-                robot.aimingMotor.setPower(poweraiming);
+                //robot.aimingMotor.setPower(poweraiming);
             }
         }
     }

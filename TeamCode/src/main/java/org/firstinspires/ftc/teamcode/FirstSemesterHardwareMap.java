@@ -14,11 +14,12 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
     public DcMotor  shooterMotor        = null;
     public DcMotor  wobbleGrabMotor     = null;
     public Servo    wobbleGrabServo     = null;
-    public DcMotor linearActuator = null;
+    //public DcMotor linearActuator = null;
     public DcMotor  leftfrontDrive   = null;
     public DcMotor  rightfrontDrive  = null;
     public DcMotor  leftbackDrive   = null;
     public DcMotor  rightbackDrive  = null;
+    public DcMotor intakeMotor = null;
 
 
     public void init(HardwareMap ahwMap) {
@@ -30,6 +31,7 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
         rightbackDrive = HardwareInitMotor("rbD", false);
         leftbackDrive = HardwareInitMotor("lbD", true);
         rightfrontDrive = HardwareInitMotor("rfD", false);
+        intakeMotor = HardwareInitMotor("Intake", false);
 
     }
 }

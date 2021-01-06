@@ -40,11 +40,12 @@ import com.qualcomm.robotcore.util.Range;
 public class ShooterTeleop extends LinearOpMode {
 
     /* Declare OpMode members. */
-    ShooterHardwareMap robot   = new ShooterHardwareMap();   // Use a Pushbot's hardware
+    IntakeMechanismHardwareMap robot   = new  IntakeMechanismHardwareMap ();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
 
     static final double     MAX_SPEED = 1;
+    static double IntakeSpeed;
 
     @Override
     public void runOpMode() {
@@ -110,6 +111,9 @@ public class ShooterTeleop extends LinearOpMode {
 
             // Send calculated power to wheels
             robot.shooterMotor.setPower(power);
+
+            IntakeSpeed=-gamepad1.right_stick_y;
+            robot.intakeMotor.setPower(IntakeSpeed);
 
             // Show the elapsed game time and wheel power.
         }
