@@ -10,6 +10,7 @@ public class IntakeMechanismHardwareMap extends HardwareMapUtil {
 
     public DcMotor intakeMotor = null;
     public DcMotor  shooterMotor        = null;
+    public DcMotor innerpastaMotor = null;
 
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
@@ -19,5 +20,7 @@ public class IntakeMechanismHardwareMap extends HardwareMapUtil {
 
         shooterMotor = HardwareInitMotor("shootM", true);
         shooterMotor.setPower(0);
+
+        innerpastaMotor = HardwareInitMotor("Pasta", false);
     }
 }

@@ -18,6 +18,7 @@ public class ShooterHardwareMap extends  HardwareMapUtil
    // public DcMotor aimingMotor = null;
     public DcMotor intakeMotor = null;
 
+
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
 
@@ -39,6 +40,8 @@ public class ShooterHardwareMap extends  HardwareMapUtil
         aimingMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         aimingMotor.setPower(0); */
         intakeMotor = HardwareInitMotor("Intake", false);
+
+
 
         //shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }

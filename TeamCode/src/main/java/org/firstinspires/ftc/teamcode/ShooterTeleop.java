@@ -114,6 +114,7 @@ public class ShooterTeleop extends LinearOpMode {
 
             IntakeSpeed=-gamepad1.right_stick_y;
             robot.intakeMotor.setPower(IntakeSpeed);
+            robot.innerpastaMotor.setPower(IntakeSpeed);
 
             // Show the elapsed game time and wheel power.
         }
