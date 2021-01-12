@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -20,6 +21,8 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
     public DcMotor  leftbackDrive   = null;
     public DcMotor  rightbackDrive  = null;
     public DcMotor intakeMotor = null;
+    public DcMotor pastaMotor = null;
+    public CRServo pastaServo = null;
 
 
     public void init(HardwareMap ahwMap) {
@@ -32,6 +35,8 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
         leftbackDrive = HardwareInitMotor("lbD", true);
         rightfrontDrive = HardwareInitMotor("rfD", false);
         intakeMotor = HardwareInitMotor("Intake", false);
+        pastaMotor = HardwareInitMotor("pastaM", false);
+       pastaServo = hwmap.get(CRServo.class,"pastaS");
 
     }
 }
