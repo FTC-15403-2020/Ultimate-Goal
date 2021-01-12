@@ -36,7 +36,7 @@ public class RandomElementDetector extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException { }
 
-    public int RandomElementNumber() {
+    public int RandomElementNumberV1() {
         //Enable for use of external webcam
         cameraManager = ClassFactory.getInstance().getCameraManager();
         cameraName = hardwareMap.get(WebcamName.class, "webcam");
@@ -63,8 +63,42 @@ public class RandomElementDetector extends LinearOpMode {
                 }
             }
         }
-        telemetry.update();
+        //telemetry.update();
         return updatedRecognitions.size();
+    }
+
+    public int RandomElementNumberV2() {
+        //Enable for use of external webcam
+        cameraManager = ClassFactory.getInstance().getCameraManager();
+        cameraName = hardwareMap.get(WebcamName.class, "webcam");
+
+        initVuforia();
+        initTfod();
+
+        if(tfod != null) {
+            tfod.activate();
+        }
+
+        int returnVal = 0;
+        List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+        if(tfod != null) {
+            if (updatedRecognitions != null) {
+                telemetry.addData("# Object Detected", updatedRecognitions.size());
+                // step through the list of recognitions and display boundary info.
+                int i = 0;
+                for (Recognition recognition : updatedRecognitions) {
+                    telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                    if(recognition.getLabel() == "Quad") {
+                        return 3;
+                    }
+                    else if(recognition.getLabel() == "Single") {
+                        returnVal = 1;
+                    }
+                }
+            }
+        }
+        //telemetry.update();
+        return returnVal;
     }
 
     private void initVuforia() {
