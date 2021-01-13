@@ -43,14 +43,14 @@ public abstract class HardwareMapUtil {
     }
     public CRServo HardwareInitCRServo(String configname, boolean forward){
         CRServo crservo = null;
-        crservo = hardwareMap.crservo.get(configname);
-        crservo.setPower(0);
+        crservo = hwMap.get(CRServo.class, configname);
         if(forward){
             crservo.setDirection(CRServo.Direction.FORWARD);
         }
         else{
             crservo.setDirection(CRServo.Direction.REVERSE);
         }
+        crservo.setPower(0);
         return crservo;
     }
     public ColorSensor HardwareInitColorSensor(String configname){

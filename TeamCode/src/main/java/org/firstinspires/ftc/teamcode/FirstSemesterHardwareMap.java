@@ -38,7 +38,7 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
         rightfrontDrive = HardwareInitMotor("rfD", false);
         intakeMotor = HardwareInitMotor("Intake", false);
         pastaMotor = HardwareInitMotor("pastaM", false);
-        pastaServo = hardwareMap.crservo.get("pastaS");
+        pastaServo =HardwareInitCRServo("pastaS", false);
 
     }
 }
