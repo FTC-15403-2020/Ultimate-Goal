@@ -112,12 +112,12 @@ public class FirstSemesterTeleop extends LinearOpMode {
 
             robot.shooterMotor.setPower(power);
             mPow = gamepad2.left_stick_y/2;
-            robot.wobbleGrabMotor.setPower(mPow);
-            if(gamepad2.a) {
+           // robot.wobbleGrabMotor.setPower(mPow);
+           /* if(gamepad2.a) {
                 robot.wobbleGrabServo.setPosition(SERVO_CLOSED); }
             if(gamepad2.b) {
                 robot.wobbleGrabServo.setPosition(SERVO_OPEN); }
-            IntakeSpeed=-gamepad2.right_stick_y;
+            IntakeSpeed=-gamepad2.right_stick_y;*/
             robot.intakeMotor.setPower(IntakeSpeed);
             robot.pastaMotor.setPower(IntakeSpeed);
 
