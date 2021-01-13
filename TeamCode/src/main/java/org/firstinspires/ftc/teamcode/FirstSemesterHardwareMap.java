@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 public class FirstSemesterHardwareMap extends  HardwareMapUtil
 {
     HardwareMap hwmap       = null;
@@ -36,7 +38,7 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
         rightfrontDrive = HardwareInitMotor("rfD", false);
         intakeMotor = HardwareInitMotor("Intake", false);
         pastaMotor = HardwareInitMotor("pastaM", false);
-       pastaServo
+        pastaServo = hardwareMap.crservo.get("pastaS");
 
     }
 }
