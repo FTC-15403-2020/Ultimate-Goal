@@ -1,9 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
 public abstract class HardwareMapUtil {
     HardwareMap hwMap           =  null;
@@ -35,4 +41,21 @@ public abstract class HardwareMapUtil {
         servo.setPosition(position);
         return servo;
     }
+    public CRServo HardwareInitCRServo(String configname, boolean forward){
+        CRServo crservo = null;
+        crservo = hardwareMap.crservo.get(configname);
+        crservo.setPower(0);
+        if(forward){
+            crservo.setDirection(CRServo.Direction.FORWARD);
+        }
+        else{
+            crservo.setDirection(CRServo.Direction.REVERSE);
+        }
+        return crservo;
+    }
+    public ColorSensor HardwareInitColorSensor(String configname){
+        return hwMap.get(ColorSensor.class, configname);
+        //UNTESTED!
+    }
+
 }
