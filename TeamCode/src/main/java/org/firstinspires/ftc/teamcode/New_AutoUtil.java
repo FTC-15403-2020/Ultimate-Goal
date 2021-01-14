@@ -25,7 +25,7 @@ public class New_AutoUtil extends LinearOpMode{
     private ElapsedTime runtime = new ElapsedTime();
     BNO055IMU imu;
     //Hardware Map Names for drive motors and odometry wheels. THIS WILL CHANGE ON EACH ROBOT, YOU NEED TO UPDATE THESE VALUES ACCORDINGLY
-    String rfName = "rightFrontDrive", rbName = "rightBackDrive", lfName = "leftFrontDrive", lbName = "leftBackDrive";
+    String rfName = "rfD", rbName = "rbD", lfName = "lfD", lbName = "lbD";
     String verticalLeftEncoderName = lbName, verticalRightEncoderName = lfName, horizontalEncoderName = rfName;
     OdometryGlobalCoordinatePosition globalPositionUpdate;
     final double COUNTS_PER_INCH = 307.699557;

@@ -67,6 +67,8 @@ public class FirstSemesterTeleop extends LinearOpMode {
 
         double mPow = 0;
 
+        double pastaPos = 0;
+
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
@@ -110,13 +112,16 @@ public class FirstSemesterTeleop extends LinearOpMode {
 
             robot.shooterMotor.setPower(power);
             mPow = gamepad2.left_stick_y/2;
-            robot.wobbleGrabMotor.setPower(mPow);
-            if(gamepad2.a) {
+           // robot.wobbleGrabMotor.setPower(mPow);
+           /* if(gamepad2.a) {
                 robot.wobbleGrabServo.setPosition(SERVO_CLOSED); }
             if(gamepad2.b) {
-                robot.wobbleGrabServo.setPosition(SERVO_OPEN); }
+                robot.wobbleGrabServo.setPosition(SERVO_OPEN); }*/
             IntakeSpeed=-gamepad2.right_stick_y;
             robot.intakeMotor.setPower(IntakeSpeed);
+            robot.pastaMotor.setPower(IntakeSpeed);
+
+            robot.pastaServo.setPower(IntakeSpeed);
         }
 
     }
