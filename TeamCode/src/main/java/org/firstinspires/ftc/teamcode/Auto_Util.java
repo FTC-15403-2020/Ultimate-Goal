@@ -4,8 +4,10 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -15,7 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 @TeleOp(name="Auto_Util", group="abstract")
 @Disabled
-public class Auto_Util extends LinearOpMode{
+public abstract class Auto_Util extends LinearOpMode{
     static final double COUNTS_PER_MOTOR_REV = 1120;    // eg: TETRIX Motor Encoder
     static final double DRIVE_GEAR_REDUCTION = 1;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
@@ -27,17 +29,21 @@ public class Auto_Util extends LinearOpMode{
     DcMotor utilmotor1, utilmotor2, utilmotor3, utilmotor4;
     //odometry encoders
     DcMotor verticalLeft, verticalRight, horizontal;
+    //servos
+    Servo servo1;
+    CRServo crservo1, crservo2;
     private ElapsedTime runtime = new ElapsedTime();
     BNO055IMU imu;
     //Hardware Map Names for drive motors and odometry wheels. THIS WILL CHANGE ON EACH ROBOT, YOU NEED TO UPDATE THESE VALUES ACCORDINGLY
     String rfName = "rfD", rbName = "rbD", lfName = "lfD", lbName = "lbD";
+    String util1name = "Intake", util2name = "pastaM", util3name = "shootM", util4name = "wobbleG";
+    String servo1name = "wobbleS", crservo1name = "pastaS", crservo2name = "pastaS2";
     String verticalLeftEncoderName = lbName, verticalRightEncoderName = lfName, horizontalEncoderName = rfName;
     OdometryGlobalCoordinatePosition globalPositionUpdate;
     final double ODOMETRY_COUNTS_PER_INCH = 307.699557;
-
     @Override
     public void runOpMode() throws InterruptedException {
-        telemetry.addData("you shouldn't be here!", "Silly!");
+        telemetry.addData("you shouldn't be here!", "This program isnt meant to be run, only for use with all of its methods");
         telemetry.update();
     }
 
@@ -47,41 +53,7 @@ public class Auto_Util extends LinearOpMode{
     public void assignUtilMotors(DcMotor util1, DcMotor util2, DcMotor util3, DcMotor util4){
         utilmotor1 = util1; utilmotor2 = util2; utilmotor3 = util3; utilmotor4 = util4;
     }
-    public void setAllDriveMotors(double time){
-        runtime.reset();
-        while(runtime.seconds() < time){
-            rfmotor.setPower(1); rbmotor.setPower(1);
-            lfmotor.setPower(1); lbmotor.setPower(1);
-        }
-    }
-    public void strafeLeft(double time){
-        runtime.reset();
-        while(runtime.seconds() < time){
-            rfmotor.setPower(1); rbmotor.setPower(-1);
-            lfmotor.setPower(-1); lbmotor.setPower(1);
-        }
-    }
-    public void strafeRight(double time){
-        runtime.reset();
-        while(runtime.seconds() < time){
-            rfmotor.setPower(-1); rbmotor.setPower(1);
-            lfmotor.setPower(1); lbmotor.setPower(-1);
-        }
-    }
-    public void turnRight(double time){
-        runtime.reset();
-        while(runtime.seconds() < time){
-            rfmotor.setPower(-1); rbmotor.setPower(-1);
-            lfmotor.setPower(1); lbmotor.setPower(1);
-        }
-    }
-    public void turnLeft(double time){
-        runtime.reset();
-        while(runtime.seconds() < time){
-            rfmotor.setPower(1); rbmotor.setPower(1);
-            lfmotor.setPower(-1); lbmotor.setPower(-1);
-        }
-    }
+
     public static double heading(BNO055IMU imu) {
         Orientation angles;
         angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
@@ -97,7 +69,7 @@ public class Auto_Util extends LinearOpMode{
             return 0;
         }
     }
-    public void initOdometry(){
+    /*public void initOdometry(){
         //Initialize hardware map values.
         initDriveHardwareMap(rfName, rbName, lfName, lbName, verticalLeftEncoderName, verticalRightEncoderName, horizontalEncoderName);
         //Create and start GlobalCoordinatePosition thread to constantly update the global coordinate positions
@@ -109,15 +81,17 @@ public class Auto_Util extends LinearOpMode{
         globalPositionUpdate.reverseNormalEncoder();
         globalPositionUpdate.reverseLeftEncoder();
     }
-    private void initDriveHardwareMap(String rfName, String rbName, String lfName, String lbName, String vlEncoderName, String vrEncoderName, String hEncoderName){
+     */
+    private void initDriveHardwareMap(String rfName, String rbName, String lfName, String lbName){
         rfmotor = hardwareMap.dcMotor.get(rfName);
         rbmotor = hardwareMap.dcMotor.get(rbName);
         lfmotor = hardwareMap.dcMotor.get(lfName);
         lbmotor = hardwareMap.dcMotor.get(lbName);
 
-        verticalLeft = hardwareMap.dcMotor.get(vlEncoderName);
+        /*verticalLeft = hardwareMap.dcMotor.get(vlEncoderName);
         verticalRight = hardwareMap.dcMotor.get(vrEncoderName);
         horizontal = hardwareMap.dcMotor.get(hEncoderName);
+         */
 
         rfmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rbmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -129,19 +103,64 @@ public class Auto_Util extends LinearOpMode{
         lfmotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lbmotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        verticalLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lbmotor.setDirection(DcMotor.Direction.REVERSE);
+        lfmotor.setDirection(DcMotor.Direction.REVERSE);
+        rbmotor.setDirection(DcMotor.Direction.FORWARD);
+        rfmotor.setDirection(DcMotor.Direction.FORWARD);
+
+        /*verticalLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         verticalRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         horizontal.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        verticalLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+         */
+
+        /*verticalLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         verticalRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         horizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+         */
 
 
         rfmotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rbmotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lfmotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lbmotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+    private void initUtilHardwareMap(String util1name, String util2name, String util3name, String util4name){
+        utilmotor1 = hardwareMap.dcMotor.get(util1name);
+        utilmotor2 = hardwareMap.dcMotor.get(util2name);
+        utilmotor3 = hardwareMap.dcMotor.get(util3name);
+        utilmotor4 = hardwareMap.dcMotor.get(util4name);
+
+        utilmotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        utilmotor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        utilmotor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        utilmotor4.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        utilmotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        utilmotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        utilmotor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        utilmotor4.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        utilmotor1.setDirection(DcMotor.Direction.FORWARD);
+        utilmotor2.setDirection(DcMotor.Direction.FORWARD);
+        utilmotor3.setDirection(DcMotor.Direction.FORWARD);
+        utilmotor4.setDirection(DcMotor.Direction.FORWARD);
+
+        utilmotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        utilmotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        utilmotor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        utilmotor4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+    private void initServoHardwareMap(String servo1name, String crservo1name, String crservo2name){
+        servo1 = hardwareMap.servo.get(servo1name);
+        servo1.setPosition(0);
+        crservo1 = hardwareMap.crservo.get(crservo1name);
+        crservo2 = hardwareMap.crservo.get(crservo2name);
+        crservo1.setDirection(CRServo.Direction.FORWARD);
+        crservo2.setDirection(CRServo.Direction.FORWARD);
+        crservo1.setPower(0);
+        crservo2.setPower(0);
     }
     public void encoderDrive(double speed,
                              double leftInches, double rightInches,
@@ -319,26 +338,33 @@ public class Auto_Util extends LinearOpMode{
         rbmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rfmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
-    /* public void initAuto(){
-         lfmotor = hardwareMap.dcMotor.get("leftFrontDrive");
-         rfmotor = hardwareMap.dcMotor.get("rightFrontDrive");
-         lbmotor = hardwareMap.dcMotor.get("leftBackDrive");
-         rbmotor = hardwareMap.dcMotor.get("rightBackDrive");
-         armRotationMotor = hardwareMap.dcMotor.get("armRotationMotor");
-         armExtensionMotor = hardwareMap.dcMotor.get("armExtensionMotor");
 
-         armRotationMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-         armExtensionMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    /*
+    lfD
+    lbD
+    rbD
+    rfD
+    Intake
+    pastaM
+    shootM
+    wobbleG
 
-         double servoPosition = .31;
-         double stoneServoPosition = 0;
-         double grabberServoPosition = 1;
+    Servos:
 
-         leftServo = hardwareMap.servo.get("leftServo");
-         rightServo = hardwareMap.servo.get("rightServo");
-         stoneServo = hardwareMap.servo.get("stoneServo");
-         grabberServo = hardwareMap.servo.get("grabberServo");
+    wobbleS
+    pastaS
+    pastaS2
 
+     String verticalLeftEncoderName = lbName, verticalRightEncoderName = lfName, horizontalEncoderName = rfName;
+     */
+
+
+
+
+     public void initAuto(){
+         initDriveHardwareMap(rfName, rbName, lfName, lbName);
+         initUtilHardwareMap(util1name, util2name, util3name, util4name);
+         initServoHardwareMap(servo1name, crservo1name, crservo2name);
          //IMU Stuff, sets up parameters and reports accelerations to logcat log
          BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
          parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -346,24 +372,8 @@ public class Auto_Util extends LinearOpMode{
          parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmodeaz
          imu = hardwareMap.get(BNO055IMU.class, "imu");
          imu.initialize(parameters);
-
-         lbmotor.setDirection(DcMotor.Direction.REVERSE);
-         lfmotor.setDirection(DcMotor.Direction.REVERSE);
-         rbmotor.setDirection(DcMotor.Direction.FORWARD);
-         rfmotor.setDirection(DcMotor.Direction.FORWARD);
-
-
-         lfmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         lbmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         rbmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         rfmotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-         lfmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-         lbmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-         rbmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-         rfmotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
      }
-     */
+
     public double accelerate(DcMotor motor, double speed, double target){
         if(motor.getCurrentPosition()<(target/10)){
             return speed*1.30;
@@ -372,6 +382,41 @@ public class Auto_Util extends LinearOpMode{
             return speed*0.9;
         }
         return speed;
+    }
+    public void setAllDriveMotors(double time){
+        runtime.reset();
+        while(runtime.seconds() < time){
+            rfmotor.setPower(1); rbmotor.setPower(1);
+            lfmotor.setPower(1); lbmotor.setPower(1);
+        }
+    }
+    public void strafeLeft(double time){
+        runtime.reset();
+        while(runtime.seconds() < time){
+            rfmotor.setPower(1); rbmotor.setPower(-1);
+            lfmotor.setPower(-1); lbmotor.setPower(1);
+        }
+    }
+    public void strafeRight(double time){
+        runtime.reset();
+        while(runtime.seconds() < time){
+            rfmotor.setPower(-1); rbmotor.setPower(1);
+            lfmotor.setPower(1); lbmotor.setPower(-1);
+        }
+    }
+    public void turnRight(double time){
+        runtime.reset();
+        while(runtime.seconds() < time){
+            rfmotor.setPower(-1); rbmotor.setPower(-1);
+            lfmotor.setPower(1); lbmotor.setPower(1);
+        }
+    }
+    public void turnLeft(double time){
+        runtime.reset();
+        while(runtime.seconds() < time){
+            rfmotor.setPower(1); rbmotor.setPower(1);
+            lfmotor.setPower(-1); lbmotor.setPower(-1);
+        }
     }
 }
 
