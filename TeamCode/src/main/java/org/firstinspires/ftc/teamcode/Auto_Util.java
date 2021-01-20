@@ -21,6 +21,8 @@ public class Auto_Util extends LinearOpMode{
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double ENCODER_COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.14159);
+    static final double DRIVE_SPEED = 0.2;
+    static final double STRAFE_SPEED = 0.8;
     //Drive motors
     DcMotor rfmotor, rbmotor, lfmotor, lbmotor;
     //Utility motors
