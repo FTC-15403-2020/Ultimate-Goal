@@ -25,6 +25,7 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
     public DcMotor intakeMotor = null;
     public DcMotor pastaMotor = null;
     public CRServo pastaServo = null;
+    public CRServo pastaServo2 = null;
 
 
     public void init(HardwareMap ahwMap) {
@@ -38,7 +39,8 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
         rightfrontDrive = HardwareInitMotor("rfD", false);
         intakeMotor = HardwareInitMotor("Intake", false);
         pastaMotor = HardwareInitMotor("pastaM", false);
-        pastaServo =HardwareInitCRServo("pastaS", false);
+        pastaServo = HardwareInitCRServo("pastaS", false);
+        pastaServo2 = HardwareInitCRServo("pastaS2", false);
 
     }
 }
