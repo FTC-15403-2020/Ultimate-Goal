@@ -15,9 +15,9 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
 
     /* Public OpMode members. */
     public DcMotor  shooterMotor        = null;
-    //public DcMotor  wobbleGrabMotor     = null;
-    //public Servo    wobbleGrabServo     = null;
-    //public DcMotor linearActuator = null;
+    public DcMotor  wobbleGrabMotor     = null;
+    public Servo    wobbleGrabServo     = null;
+  //  public DcMotor linearActuator = null;
     public DcMotor  leftfrontDrive   = null;
     public DcMotor  rightfrontDrive  = null;
     public DcMotor  leftbackDrive   = null;
@@ -31,8 +31,8 @@ public class FirstSemesterHardwareMap extends  HardwareMapUtil
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
         shooterMotor = HardwareInitMotor("shootM", true);
-        //wobbleGrabMotor = HardwareInitMotor("wobbleG", true);
-        //wobbleGrabServo = HardwareInitServo("wobbleS", 0);
+        wobbleGrabMotor = HardwareInitMotor("wobbleG", true);
+        wobbleGrabServo = HardwareInitServo("wobbleS", 0);
         leftfrontDrive = HardwareInitMotor("lfD", true);
         rightbackDrive = HardwareInitMotor("rbD", false);
         leftbackDrive = HardwareInitMotor("lbD", true);
