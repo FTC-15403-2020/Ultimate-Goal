@@ -40,8 +40,8 @@ import com.qualcomm.robotcore.util.Range;
 public class FirstSemesterTeleop extends LinearOpMode {
 
     /* Declare OpMode members. */
-    FirstSemesterHardwareMap robot   = new FirstSemesterHardwareMap();
-    private ElapsedTime     runtime = new ElapsedTime();
+    FirstSemesterHardwareMap robot = new FirstSemesterHardwareMap();
+    private ElapsedTime runtime = new ElapsedTime();
     static final double FORWARD_SPEED = 0.6;
     static double turnPower = 0.5;
     static double strafePower = 0.5;
@@ -50,8 +50,9 @@ public class FirstSemesterTeleop extends LinearOpMode {
     static double leftBackPower;
     static double rightFrontPower;
     static double rightBackPower;
-    static final double     MAX_SPEED = 1;
+    static final double MAX_SPEED = 1;
     static double IntakeSpeed;
+    //static double pservoSpeed;
 
     @Override
     public void runOpMode() {
@@ -62,12 +63,11 @@ public class FirstSemesterTeleop extends LinearOpMode {
         double CurTime = elapTime;
         double LastTime = elapTime;
 
-        final int SERVO_CLOSED  = 359;
-        final int SERVO_OPEN    = 60;
+        final int SERVO_CLOSED = 359;
+        final int SERVO_OPEN = 60;
 
         double mPow = 0;
 
-        double pastaPos = 0;
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
@@ -91,34 +91,32 @@ public class FirstSemesterTeleop extends LinearOpMode {
             robot.rightbackDrive.setPower(-rightBackPower);
             telemetry.addData("Speed", robot.rightbackDrive.getPower());
             telemetry.update();
-            if(gamepad2.right_bumper==true) {
+            if (gamepad2.right_bumper == true) {
                 double period = 5000;
                 double quadScale = 0.1;
                 CurTime = elapTime;
-                timeShooting = timeShooting + (LastTime-CurTime);
+                timeShooting = timeShooting + (LastTime - CurTime);
                 LastTime = CurTime;
 
-                if(timeShooting > period) {
-                    power = Math.pow((timeShooting/period), 3);
-                }
-                else {
+                if (timeShooting > period) {
+                    power = Math.pow((timeShooting / period), 3);
+                } else {
                     power = -1;
                 }
-            }
-            else {
+            } else {
                 timeShooting = 0;
                 power = 0;
             }
 
             robot.shooterMotor.setPower(power);
-            mPow = gamepad2.left_stick_y/2;
-           // robot.wobbleGrabMotor.setPower(mPow);
-           /* if(gamepad2.a) {
+            mPow = gamepad2.left_stick_y / 2;
+            robot.wobbleGrabMotor.setPower(mPow);
+            if(gamepad2.a) {
                 robot.wobbleGrabServo.setPosition(SERVO_CLOSED); }
             if(gamepad2.b) {
-                robot.wobbleGrabServo.setPosition(SERVO_OPEN); }*/
-            //IntakeSpeed=-gamepad2.right_stick_y;
-           /* if (gamepad2.b){
+                robot.wobbleGrabServo.setPosition(SERVO_OPEN); }
+          /*  //IntakeSpeed=-gamepad2.right_stick_y;
+            if (gamepad2.b){
                 robot.intakeMotor.setPower(1);
                 robot.pastaMotor.setPower(1);
                 robot.pastaServo.setPower(1);
@@ -129,12 +127,21 @@ public class FirstSemesterTeleop extends LinearOpMode {
                 robot.pastaServo.setPower(0);
                 robot.pastaServo2.setPower(0);
             }*/
-           IntakeSpeed=gamepad2.right_stick_y;
+            IntakeSpeed = gamepad2.right_stick_y;
             robot.intakeMotor.setPower(-IntakeSpeed);
             robot.pastaMotor.setPower(-IntakeSpeed);
-            robot.pastaServo.setPower(IntakeSpeed*2);
-            robot.pastaServo2.setPower(-IntakeSpeed*2);
-        }
+            //robot.pastaServo.setPower(pservoSpeed * 2);
+            robot.pastaServo2.setPower(-IntakeSpeed * 2);
 
+            if (gamepad2.y) {
+                robot.pastaServo.setPower(1);
+
+
+            }
+            else {
+                robot.pastaServo.setPower(0);
+
+            }
+        }
     }
 }
